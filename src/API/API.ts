@@ -39,6 +39,31 @@ export type putTodolistType = {
     fieldsErrors: string[]
     resultCode: number
 }
+export type TaskType = {
+    description: string
+    title: string
+    completed: boolean
+    status: number
+    priority: number
+    startDate: string
+    deadline: string
+    id: string
+    todoListId: string
+    order: number
+    addedDate: string
+}
+export type getTasksType = {
+    error : string
+    items : Array<TaskType>
+
+    totalCount : number
+}
+
+export type postTasksType = {
+    resultCode: number
+    messages: Array<string>
+    data: Array<TaskType>
+}
 export const APItodolist = {
     getTodolists() {
         return instance.get<Array<getTodolistsType>>("todo-lists")
@@ -51,5 +76,11 @@ export const APItodolist = {
     },
     putTodolist(todolistId : string,newTitle: string) {
         return instance.put<putTodolistType>(`todo-lists/${todolistId}`, {title: newTitle})
+    },
+    getTasks(todolistId : string) {
+        return instance.get<getTasksType>(`todo-lists/${todolistId}/tasks`)
+    },
+    postTasks(todolistId : string, title : string) {
+        return instance.post<postTasksType>(`todo-lists/${todolistId}/tasks`, {title : title})
     }
 }
