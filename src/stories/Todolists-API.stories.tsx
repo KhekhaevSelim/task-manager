@@ -21,12 +21,12 @@ export const GetTodolists = () => {
         </div>
     )
 }
-export const PostTodolist = () => {
+export const CreateTodolist = () => {
 
     let [todolists, setTodolists] = useState<any>(null)
     let [title, setTitle] = useState<string>("")
-  const postTodolist = ( title : string) => {
-      APItodolist.postTodolist(title).then((res) => {
+  const createTodolist = ( title : string) => {
+      APItodolist.createTodolist(title).then((res) => {
           setTodolists(res.data.data.item)
       })
   }
@@ -38,7 +38,7 @@ export const PostTodolist = () => {
             <input value={todolists} onChange={(e)=> {
                 setTitle(e.currentTarget.value)
             }}/>
-            <button onClick={()=>postTodolist(title)}>post todolist</button>
+            <button onClick={()=>createTodolist(title)}>post todolist</button>
         </div>
         </div>
     )
@@ -66,14 +66,14 @@ export const DeleteTodolist = () => {
         </div>
     )
 }
-export const PutTodolist = () => {
+export const UpdateTodolist = () => {
 
     let [todolists, setTodolists] = useState<any>("")
     let [newTitle, setNewTitle] = useState<string>("")
     let [todolistId, setTodolistId] = useState<string>("")
 
-    const changeTodolistTitle = (todolistId : string, newTitle : string ) => {
-        APItodolist.putTodolist(todolistId,newTitle).then((res) => {
+    const updateTodolistTitle = (todolistId : string, newTitle : string ) => {
+        APItodolist.updateTodolist(todolistId,newTitle).then((res) => {
             setTodolists(res.data.data)
         })
     }
@@ -84,7 +84,7 @@ export const PutTodolist = () => {
         <div>{JSON.stringify(todolists)}
             <input placeholder={"enter todolistId"} value={todolistId} onChange={(e)=>setTodolistId(e.currentTarget.value)}/>
             <input placeholder={"enter new title"} value={newTitle} onChange={(e)=> setNewTitle(e.currentTarget.value)}/>
-        <button onClick={()=>changeTodolistTitle(todolistId, newTitle)}>put todolist</button>
+        <button onClick={()=>updateTodolistTitle(todolistId, newTitle)}>put todolist</button>
 
         </div>
     )

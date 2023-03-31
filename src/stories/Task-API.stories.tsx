@@ -5,11 +5,11 @@ export default {
     title : "Tasks-API"
 }
 
-export const GetTasks = () => {
+export const GetTask = () => {
     let [todolistId,setTodolistId] = useState<string>("")
     let [tasks, setTasks] = useState<any>(null)
-    const getTasks = ( todolistId : string ) => {
-        APItodolist.getTasks(todolistId).then((res)=> {
+    const getTask = ( todolistId : string ) => {
+        APItodolist.getTask(todolistId).then((res)=> {
             debugger
             setTasks(res.data.items)
         })
@@ -21,19 +21,19 @@ export const GetTasks = () => {
 
           <div>
               <input value={todolistId} onChange={(e)=> setTodolistId(e.currentTarget.value)} placeholder={"todolistId"}/>
-              <button onClick={()=>getTasks(todolistId)}>get tasks</button>
+              <button onClick={()=>getTask(todolistId)}>get tasks</button>
           </div>
       </div>
     )
 }
-export const PostTasks = () => {
+export const CreateTasks = () => {
     let [todolistId,setTodolistId] = useState<string>("")
 
     let [title,setTitle] = useState<string>("")
 
     let [tasks, setTasks] = useState<any>(null)
-    const postTasks = ( todolistId : string , title : string) => {
-        APItodolist.postTasks(todolistId, title).then((res)=> {
+    const updateTask = ( todolistId : string , title : string) => {
+        APItodolist.createTask(todolistId, title).then((res)=> {
             debugger
             setTasks(res.data.data)
         })
@@ -46,20 +46,20 @@ export const PostTasks = () => {
             <div>
                 <input placeholder={"todolistId"} value={todolistId} onChange={(e)=> setTodolistId(e.currentTarget.value)}/>
                 <input placeholder={"taskTitle"} value={title} onChange={(e)=> setTitle(e.currentTarget.value)}/>
-                <button onClick={()=>postTasks(todolistId,title)}>get tasks</button>
+                <button onClick={()=>updateTask(todolistId,title)}>get tasks</button>
             </div>
         </div>
     )
 }
 
-export const PutTasks = () => {
+export const UpdateTasks = () => {
     let [todolistId,setTodolistId] = useState<string>("")
     let [taskId, setTaskId] = useState<string>("")
     let [title,setTitle] = useState<string>("")
 
     let [tasks, setTasks] = useState<any>(null)
     const putTasks = ( todolistId : string ,taskId : string, title : string) => {
-        APItodolist.putTasks(todolistId, taskId, title).then((res)=> {
+        APItodolist.updateTask(todolistId, taskId, title).then((res)=> {
             debugger
             setTasks(res.data.data)
         })
@@ -79,12 +79,12 @@ export const PutTasks = () => {
     )
 }
 
-export const DeleteTasks = () => {
+export const DeleteTask = () => {
     let [todolistId,setTodolistId] = useState<string>("")
     let [taskId, setTaskId] = useState<string>("")
 
     let [tasks, setTasks] = useState<any>(null)
-    const deleteTasks = ( todolistId : string ,taskId : string) => {
+    const deleteTask = ( todolistId : string ,taskId : string) => {
         APItodolist.deleteTask(todolistId, taskId).then((res)=> {
             setTasks(res.data.data)
         })
@@ -97,7 +97,7 @@ export const DeleteTasks = () => {
             <div>
                 <input placeholder={"todolistId"} value={todolistId} onChange={(e)=> setTodolistId(e.currentTarget.value)}/>
                 <input placeholder={"taskId"} value={taskId} onChange={(e)=> setTaskId(e.currentTarget.value)}/>
-                <button onClick={()=>deleteTasks(todolistId, taskId)}>delete tasks</button>
+                <button onClick={()=>deleteTask(todolistId, taskId)}>delete tasks</button>
             </div>
         </div>
     )
