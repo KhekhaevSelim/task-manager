@@ -59,6 +59,20 @@ export type responseTasksType = {
     messages: Array<string>
     data: {}
 }
+
+export const model : TaskType = {
+    id : "",
+    status : TaskStatuses.New,
+    todoListId : "",
+    startDate : "",
+    order : 0,
+    priority : 1,
+    description: "",
+    title : "",
+    addedDate : "",
+    deadline : ""
+
+}
 export const APItodolist = {
     getTodolists() {
         return instance.get<Array<TodolistType>>("todo-lists")
