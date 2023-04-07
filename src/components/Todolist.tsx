@@ -5,10 +5,10 @@ import {IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import SuperButton from "./SuperButton";
 import Task from "./Task";
-import {TaskStatuses, TaskType} from "./API/API";
-import {FilterValuesType} from './state/todolists-reducer';
-import {useAppDispatch} from "./castomHooks/appHooks";
-import {setTasksTC} from "./state/tasks-reducer";
+import {TaskStatuses, TaskType} from "../API/API";
+import {FilterValuesType} from '../state/todolists-reducer';
+import {useAppDispatch} from "../castomHooks/appHooks";
+import {setTasksTC} from "../state/tasks-reducer";
 
 
 type PropsType = {

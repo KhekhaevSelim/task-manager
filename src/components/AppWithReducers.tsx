@@ -1,6 +1,6 @@
-import React, {useReducer, useState} from 'react';
-import './App.css';
-import { Todolist} from './Todolist';
+import React, {useReducer} from 'react';
+import '../App.css';
+import {Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from './AddItemForm';
 
@@ -10,11 +10,11 @@ import {
     changeTodolistTitleAC,
     removeTodolistAC,
     todolistsReducer
-} from './state/todolists-reducer';
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './state/tasks-reducer';
+} from '../state/todolists-reducer';
+import {addTaskAC, removeTaskAC, tasksReducer, updateTaskAC} from '../state/tasks-reducer';
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
-import {TaskPriorities, TaskStatuses} from "./API/API";
+import {TaskPriorities, TaskStatuses} from "../API/API";
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistType = {
@@ -57,17 +57,19 @@ function AppWithReducers() {
     }
 
     function addTask(title: string, todolistId: string) {
-        const action = addTaskAC(title, todolistId);
+        const action = addTaskAC({id: "4", title,status: TaskStatuses.New, description: "",
+            priority : TaskPriorities.Low, startDate : "", deadline : "", todoListId : todolistId,
+            order : 0, addedDate : "" });
         dispatchToTasks(action);
     }
 
     function changeStatus(id: string, status : TaskStatuses, todolistId: string) {
-        const action = changeTaskStatusAC(id, status, todolistId);
+        const action = updateTaskAC(id, {status}, todolistId);
         dispatchToTasks(action);
     }
 
     function changeTaskTitle(id: string, newTitle: string, todolistId: string) {
-        const action = changeTaskTitleAC(id, newTitle, todolistId);
+        const action = updateTaskAC(id, { title : newTitle}, todolistId);
         dispatchToTasks(action);
     }
 
@@ -88,7 +90,7 @@ function AppWithReducers() {
     }
 
     function addTodolist(title: string) {
-        const action = addTodolistAC(title);
+        const action = addTodolistAC({id: v1(), title, addedDate : "", order : 0});
         dispatchToTasks(action);
         dispatchToTodolists(action);
     }

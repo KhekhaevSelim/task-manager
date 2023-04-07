@@ -1,5 +1,5 @@
 import React from "react"
-import Task from "../Task"
+import Task from "../components/Task"
 import {action} from "@storybook/addon-actions";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
 import {TaskPriorities, TaskStatuses} from "../API/API";

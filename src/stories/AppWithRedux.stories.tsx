@@ -1,4 +1,4 @@
-import AppWithRedux from "../AppWithRedux";
+import AppWithRedux from "../components/AppWithRedux";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
 import React from "react";
 import {Provider} from "react-redux";
