@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {AddItemForm} from './AddItemForm';
 import {EditableSpan} from './EditableSpan';
 import {IconButton} from "@mui/material";
@@ -7,6 +7,8 @@ import SuperButton from "./SuperButton";
 import Task from "./Task";
 import {TaskStatuses, TaskType} from "./API/API";
 import {FilterValuesType} from './state/todolists-reducer';
+import {useAppDispatch} from "./castomHooks/appHooks";
+import {setTasksTC} from "./state/tasks-reducer";
 
 
 type PropsType = {
@@ -24,7 +26,11 @@ type PropsType = {
 }
 
 export const Todolist = React.memo((props: PropsType) => {
-    console.log("render todolist ")
+      const dispatch = useAppDispatch()
+    useEffect(()=> {
+        dispatch(setTasksTC(props.id))
+    },[])
+
     const addTask = useCallback ((title: string) => {
         props.addTask(title, props.id);
     },[props.addTask,props.id])
