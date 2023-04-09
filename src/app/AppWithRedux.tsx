@@ -3,8 +3,6 @@ import './App.css';
 import {AppBar, Button, Container, IconButton, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {TodolistsList} from "../features/todolistsList/TodolistsList";
-
-
 function AppWithRedux() {
     return (
         <div className="App">
@@ -25,5 +23,4 @@ function AppWithRedux() {
         </div>
     );
 }
-
 export default AppWithRedux;

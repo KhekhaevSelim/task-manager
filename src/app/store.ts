@@ -1,7 +1,7 @@
-import {TaskActionType, tasksReducer} from '../features/todolistsList/Todolist/Task/tasks-reducer';
+import {TasksActionType, tasksReducer} from '../features/todolistsList/Todolist/Task/tasks-reducer';
 import {TodolistsActionsType, todolistReducer} from '../features/todolistsList/Todolist/todolist-reducer';
 import {applyMiddleware, combineReducers, createStore} from 'redux';
-import thunk from "redux-thunk";
+import thunk, { ThunkAction } from "redux-thunk";
 
 
 const rootReducer = combineReducers({
@@ -9,10 +9,9 @@ const rootReducer = combineReducers({
     todolists: todolistReducer
 })
 export const store = createStore(rootReducer,applyMiddleware(thunk));
-
 export type AppRootStateType = ReturnType<typeof rootReducer>
+export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, AppActionsType>
 
-// а это, чтобы можно было в консоли браузера обращаться к store в любой момент
 // @ts-ignore
 window.store = store;
-export type AppActionsType = TodolistsActionsType | TaskActionType
+export type AppActionsType = TodolistsActionsType | TasksActionType

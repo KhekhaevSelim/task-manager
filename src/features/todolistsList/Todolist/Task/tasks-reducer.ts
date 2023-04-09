@@ -1,11 +1,11 @@
 import {addTodolistAC, removeTodolistAC, setTodolistsAC} from '../todolist-reducer';
 import {APItodolist, TaskPriorities, TaskStatuses, TaskType, UpdateTaskModelType} from "../../../../DAL/API";
 import {Dispatch} from "redux";
-import {AppActionsType, AppRootStateType} from "../../../../app/store";
+import {AppActionsType, AppRootStateType, AppThunkType} from "../../../../app/store";
 
 const initialState: TasksBusinessType = {}
 
-export const tasksReducer = (state: TasksBusinessType = initialState, action: TaskActionType): TasksBusinessType => {
+export const tasksReducer = (state: TasksBusinessType = initialState, action: TasksActionType): TasksBusinessType => {
     switch (action.type) {
         case "SET-TASKS": return {...state, [action.todolistId]: action.tasks}
         case "SET-TODOLISTS": const stateCopy = {...state};action.todolists.forEach(tl => {stateCopy[tl.id] = []});return stateCopy
@@ -25,23 +25,22 @@ export const setTasksAC = (tasks: TaskType[], todolistId: string) => ({type: "SE
 
 
 // THUNK CREATORS
-export const setTasksTC = (todolistId: string) => (dispatch: Dispatch<AppActionsType>) => {
+export const setTasksTC = (todolistId: string) : AppThunkType => dispatch => {
     APItodolist.getTask(todolistId).then(res => {dispatch(setTasksAC(res.data.items, todolistId))})}
-export const removeTaskTC = (todolistId: string, taskId: string) => (dispatch: Dispatch<AppActionsType>) => {
+export const removeTaskTC = (todolistId: string, taskId: string) : AppThunkType => dispatch => {
     APItodolist.deleteTask(todolistId, taskId).then(() => {dispatch(removeTaskAC(taskId, todolistId))})}
-export const createTaskTC = (todolistId: string, title: string) => (dispatch: Dispatch<AppActionsType>) => {
+export const createTaskTC = (todolistId: string, title: string) : AppThunkType => dispatch => {
     APItodolist.createTask(todolistId, title).then(res => {dispatch(addTaskAC(res.data.data.item))})}
-export const updateTaskTC = (todolistId: string, taskId: string, BusinessModel: UpdateTaskBusinessModelType) =>
-    (dispatch: Dispatch<AppActionsType>, getState: () => AppRootStateType) => {const state = getState()
+export const updateTaskTC = (todolistId: string, taskId: string, BusinessModel: UpdateTaskBusinessModelType) : AppThunkType =>
+    (dispatch, getState) => {const state = getState()
         const task = state.tasks[todolistId].find(t=> t.id === taskId)
-        if(!task){console.warn("task not found in BLL, Selim")
-            return}
+        if(!task){console.warn("task not found in BLL, Selim"); return}
         const ApiModel: UpdateTaskModelType = {title : task.title, status : task.status, deadline : task.deadline,
             startDate : task.startDate, priority : task.priority, description : task.description,...BusinessModel}
         APItodolist.updateTask(todolistId,taskId, ApiModel).then(res=> {dispatch(updateTaskAC(taskId, BusinessModel, todolistId))})}
 
 // TYPES
-export type TaskActionType =
+export type TasksActionType =
     | ReturnType<typeof removeTaskAC>
     | ReturnType<typeof addTaskAC>
     | ReturnType<typeof updateTaskAC>
