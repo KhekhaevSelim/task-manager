@@ -1,8 +1,8 @@
-import AppWithRedux from "../components/AppWithRedux";
+import AppWithRedux from "./AppWithRedux";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
 import React from "react";
 import {Provider} from "react-redux";
-import {ReduxStoreProviderDecorator} from "./ReduxStoreProviderDecorator.stories";
+import {ReduxStoreProviderDecorator} from "../DAL/ReduxStoreProviderDecorator.stories";
 
 export default {
     title: 'TODOLISTS/AppWithRedux',

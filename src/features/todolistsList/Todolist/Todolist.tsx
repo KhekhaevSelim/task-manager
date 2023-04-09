@@ -1,14 +1,14 @@
 import React, {useCallback, useEffect} from 'react';
-import {AddItemForm} from './AddItemForm';
-import {EditableSpan} from './EditableSpan';
+import {AddItemForm} from '../../../components/AddItemForm';
+import {EditableSpan} from '../../../components/EditableSpan';
 import {IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
-import SuperButton from "./SuperButton";
-import Task from "./Task";
-import {TaskStatuses, TaskType} from "../API/API";
-import {FilterValuesType} from '../state/todolists-reducer';
-import {useAppDispatch} from "../castomHooks/appHooks";
-import {setTasksTC} from "../state/tasks-reducer";
+import SuperButton from "../../../components/SuperButton";
+import Task from "./Task/Task";
+import {TaskStatuses, TaskType} from "../../../DAL/API";
+import {FilterValuesType} from './todolist-reducer';
+import {useAppDispatch} from "../../../castomHooks/appHooks";
+import {setTasksTC} from "./Task/tasks-reducer";
 
 
 type PropsType = {

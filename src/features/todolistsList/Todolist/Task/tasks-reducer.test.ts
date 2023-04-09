@@ -5,8 +5,8 @@ import {
     TasksBusinessType,
     tasksReducer
 } from './tasks-reducer';
-import {addTodolistAC, removeTodolistAC} from './todolists-reducer';
-import {TaskPriorities, TaskStatuses} from "../API/API";
+import {addTodolistAC, removeTodolistAC} from '../todolist-reducer';
+import {TaskPriorities, TaskStatuses} from "../../../../DAL/API";
 import {v1} from "uuid";
 
 let startState: TasksBusinessType = {};

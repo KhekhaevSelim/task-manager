@@ -1,20 +1,20 @@
 import React, {useReducer} from 'react';
-import '../App.css';
-import {Todolist} from './Todolist';
+import '../app/App.css';
+import {Todolist} from '../features/todolistsList/Todolist/Todolist';
 import {v1} from 'uuid';
-import {AddItemForm} from './AddItemForm';
+import {AddItemForm} from '../components/AddItemForm';
 
 import {
     addTodolistAC,
     changeTodolistFilterAC,
     changeTodolistTitleAC,
     removeTodolistAC,
-    todolistsReducer
-} from '../state/todolists-reducer';
-import {addTaskAC, removeTaskAC, tasksReducer, updateTaskAC} from '../state/tasks-reducer';
+    todolistReducer
+} from '../features/todolistsList/Todolist/todolist-reducer';
+import {addTaskAC, removeTaskAC, tasksReducer, updateTaskAC} from '../features/todolistsList/Todolist/Task/tasks-reducer';
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
-import {TaskPriorities, TaskStatuses} from "../API/API";
+import {TaskPriorities, TaskStatuses} from "../DAL/API";
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistType = {
@@ -27,7 +27,7 @@ function AppWithReducers() {
     let todolistId1 = v1();
     let todolistId2 = v1();
 
-    let [todolists, dispatchToTodolists] = useReducer(todolistsReducer, [
+    let [todolists, dispatchToTodolists] = useReducer(todolistReducer, [
         {id: todolistId1, title: "What to learn", filter: "all", addedDate : "", order : 0},
         {id: todolistId2, title: "What to buy", filter: "all" , addedDate : "", order : 0}
     ])

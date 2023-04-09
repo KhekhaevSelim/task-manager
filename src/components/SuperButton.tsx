@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button} from "@mui/material";
-import { FilterValuesType } from '../state/todolists-reducer';
+import { FilterValuesType } from '../features/todolistsList/Todolist/todolist-reducer';
 
 type SuperButtonPropsType = {
     filter : FilterValuesType

@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import {APItodolist, TaskPriorities, TaskStatuses, UpdateTaskModelType} from "../API/API";
+import {APItodolist, TaskPriorities, TaskStatuses, UpdateTaskModelType} from "./API";
 
 export default {
-    title : "Tasks-API"
+    title : "Tasks-DAL"
 }
 
 export const GetTask = () => {

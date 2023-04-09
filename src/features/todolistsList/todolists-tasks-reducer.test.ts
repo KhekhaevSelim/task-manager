@@ -1,5 +1,5 @@
-import {addTodolistAC, TodolistBusinessType, todolistsReducer} from './todolists-reducer';
-import {TasksBusinessType, tasksReducer} from './tasks-reducer';
+import {addTodolistAC, TodolistBusinessType, todolistReducer} from './Todolist/todolist-reducer';
+import {TasksBusinessType, tasksReducer} from './Todolist/Task/tasks-reducer';
 import {v1} from "uuid";
 
 test('ids should be equals', () => {
@@ -9,7 +9,7 @@ test('ids should be equals', () => {
     const action = addTodolistAC({id: v1(), title : "new todolist", addedDate : "", order : 0});
 
     const endTasksState = tasksReducer(startTasksState, action)
-    const endTodolistsState = todolistsReducer(startTodolistsState, action)
+    const endTodolistsState = todolistReducer(startTodolistsState, action)
 
     const keys = Object.keys(endTasksState);
     const idFromTasks = keys[0];

@@ -2,7 +2,7 @@ import TextField from '@mui/material/TextField/TextField';
 import React, {ChangeEvent, KeyboardEvent, memo, useState} from 'react';
 import {IconButton} from "@mui/material";
 import {AddBox} from "@mui/icons-material";
-import '../App.css';
+import '../app/App.css';
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void

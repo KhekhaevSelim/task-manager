@@ -1,4 +1,4 @@
-import {AddItemForm} from "../components/AddItemForm";
+import {AddItemForm} from "./AddItemForm";
 import React, {ChangeEvent,KeyboardEvent, useState} from "react"
 import {action} from "@storybook/addon-actions";
 import {ComponentMeta, ComponentStory} from "@storybook/react";

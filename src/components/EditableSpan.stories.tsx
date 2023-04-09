@@ -1,5 +1,5 @@
 import React from "react"
-import {EditableSpan} from "../components/EditableSpan";
+import {EditableSpan} from "./EditableSpan";
 import {action} from "@storybook/addon-actions";
 
 export default {
