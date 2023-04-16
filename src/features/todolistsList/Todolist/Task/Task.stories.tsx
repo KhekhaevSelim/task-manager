@@ -15,8 +15,9 @@ export default {
         removeTask: action('removeTask'),
         task: {id: v1(), title: "Milk",status: TaskStatuses.Completed, description: "",
             priority : TaskPriorities.Low, startDate : "", deadline : "", todoListId : "1232343dfdf",
-            order : 0, addedDate : "" },
+            order : 0, addedDate : "" ,entityStatus : "idle"},
         todolistId: '1232343dfdf',
+
     }
 
 } as ComponentMeta<typeof Task>;
@@ -33,5 +34,5 @@ export const TaskIsNotDoneStory = Template.bind({});
 TaskIsNotDoneStory.args = {
     task: {id: v1(), title: "Milk",status: TaskStatuses.Completed, description: "",
         priority : TaskPriorities.Low, startDate : "", deadline : "", todoListId : "todolistId2",
-        order : 0, addedDate : "" }
+        order : 0, addedDate : "" , entityStatus : "idle"}
 }

@@ -15,25 +15,25 @@ beforeEach(() => {
         "todolistId1": [
             {id: "1", title: "HTML&CSS", status: TaskStatuses.New, description: "",
                 priority : TaskPriorities.Low, startDate : "", deadline : "", todoListId : "todolistId1",
-                order : 0, addedDate : "" },
+                order : 0, addedDate : "" , entityStatus : "idle"},
             {id: "2", title: "JS", status: TaskStatuses.Completed, description: "",
                 priority : TaskPriorities.Low, startDate : "", deadline : "", todoListId : "todolistId1",
-                order : 0, addedDate : "" },
+                order : 0, addedDate : "" , entityStatus : "idle"},
             {id: "3", title: "React", status: TaskStatuses.New, description: "",
                 priority : TaskPriorities.Low, startDate : "", deadline : "", todoListId : "todolistId1",
-                order : 0, addedDate : "" }
+                order : 0, addedDate : "" , entityStatus : "idle"}
 
         ],
         "todolistId2": [
             {id: "1", title: "Milk",status: TaskStatuses.New, description: "",
                 priority : TaskPriorities.Low, startDate : "", deadline : "", todoListId : "todolistId2",
-                order : 0, addedDate : "" },
+                order : 0, addedDate : "" , entityStatus : "idle"},
             {id: "2", title: "React Book", status: TaskStatuses.Completed, description: "",
                 priority : TaskPriorities.Low, startDate : "", deadline : "", todoListId : "todolistId2",
-                order : 0, addedDate : ""},
+                order : 0, addedDate : "", entityStatus : "idle"},
             {id: "3", title: "React Book", status: TaskStatuses.New, description: "",
                 priority : TaskPriorities.Low, startDate : "", deadline : "", todoListId : "todolistId2",
-                order : 0, addedDate : ""}
+                order : 0, addedDate : "", entityStatus : "idle"}
         ]
     };
 });

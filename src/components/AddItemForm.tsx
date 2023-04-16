@@ -6,6 +6,7 @@ import '../app/App.css';
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
+    disabled? : boolean
 }
 
 export const AddItemForm = memo( (props: AddItemFormPropsType) => {
@@ -42,9 +43,9 @@ export const AddItemForm = memo( (props: AddItemFormPropsType) => {
                    onKeyPress={onKeyPressHandler}
                    label="Title"
                    helperText={error}
-
+                   disabled={props.disabled}
         />
-        <IconButton color="primary" onClick={addItem}>
+        <IconButton color="primary" onClick={addItem} disabled={props.disabled}>
             <AddBox />
         </IconButton>
     </div>

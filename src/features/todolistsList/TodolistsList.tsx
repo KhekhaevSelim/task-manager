@@ -15,14 +15,19 @@ import {
     TodolistBusinessType
 } from "./Todolist/todolist-reducer";
 import {TaskStatuses} from "../../DAL/API";
-
-export const TodolistsList = () => {
+type TodolistsListPropsType = {
+    demo? : boolean
+}
+export const TodolistsList = ({demo = false, ...props}: TodolistsListPropsType) => {
     const dispatch = useAppDispatch();
     const tasks = useSelector<AppRootStateType, TasksBusinessType>(state => state.tasks)
 
 
     useEffect(() => {
-        dispatch(getTodolistsTC())
+        if(demo){
+            dispatch(getTodolistsTC())
+        }
+
     }, [])
 
     const todolists = useSelector<AppRootStateType, Array<TodolistBusinessType>>(state => state.todolists)
@@ -74,17 +79,16 @@ export const TodolistsList = () => {
                         return <Grid item key={tl.id}>
                             <Paper style={{padding: "10px"}}>
                                 <Todolist
-                                    id={tl.id}
-                                    title={tl.title}
+                                    todolist={tl}
                                     tasks={tasks[tl.id]}
                                     removeTask={removeTask}
                                     changeFilter={changeFilter}
                                     addTask={addTask}
                                     changeTaskStatus={changeStatus}
-                                    filter={tl.filter}
                                     removeTodolist={removeTodolist}
                                     changeTaskTitle={changeTaskTitle}
                                     changeTodolistTitle={changeTodolistTitle}
+                                    demo={demo}
                                 />
                             </Paper>
                         </Grid>
