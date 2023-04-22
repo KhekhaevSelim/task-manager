@@ -1,7 +1,7 @@
 import {Dispatch} from "redux";
 import {ResponseTasksType, ResponseTodolistType} from "../DAL/API"
 import {setAppStatusAC, setErrorAC} from "../app/app-reducer";
-export const handleServerAppError = (data : ResponseTasksType | ResponseTodolistType, dispatch : Dispatch) => {
+export const handleServerAppError = <T>(data : ResponseTasksType<T> | ResponseTodolistType, dispatch : Dispatch) => {
     if(data.messages.length){
         dispatch(setErrorAC(data.messages[0]))
     } else {

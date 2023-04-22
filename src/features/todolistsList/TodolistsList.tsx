@@ -15,16 +15,19 @@ import {
     TodolistBusinessType
 } from "./Todolist/todolist-reducer";
 import {TaskStatuses} from "../../DAL/API";
+import {Navigate} from "react-router-dom";
 type TodolistsListPropsType = {
     demo? : boolean
 }
 export const TodolistsList = ({demo = false, ...props}: TodolistsListPropsType) => {
     const dispatch = useAppDispatch();
     const tasks = useSelector<AppRootStateType, TasksBusinessType>(state => state.tasks)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
+
 
 
     useEffect(() => {
-        if(demo){
+        if(demo && isLoggedIn){
             dispatch(getTodolistsTC())
         }
 
@@ -67,6 +70,9 @@ export const TodolistsList = ({demo = false, ...props}: TodolistsListPropsType) 
         dispatch(addTodolistTC(title));
     }, [])
 
+    if(!isLoggedIn){
+        return <Navigate to={"/login"}/>
+    }
     return (
         <>
             <Grid container style={{padding: "20px"}}>
