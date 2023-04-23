@@ -31,7 +31,7 @@ export const TodolistsList = ({demo = false, ...props}: TodolistsListPropsType) 
             dispatch(getTodolistsTC())
         }
 
-    }, [])
+    }, [demo,isLoggedIn])
 
     const todolists = useSelector<AppRootStateType, Array<TodolistBusinessType>>(state => state.todolists)
 
@@ -71,7 +71,7 @@ export const TodolistsList = ({demo = false, ...props}: TodolistsListPropsType) 
     }, [])
 
     if(!isLoggedIn){
-        return <Navigate to={"/login"}/>
+        return <Navigate to={"/auth"}/>
     }
     return (
         <>

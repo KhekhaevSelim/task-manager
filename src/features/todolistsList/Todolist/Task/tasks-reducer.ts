@@ -1,4 +1,4 @@
-import {addTodolistAC, removeTodolistAC, setTodolistsAC} from '../todolist-reducer';
+import {addTodolistAC, clearTodosDataAC, removeTodolistAC, setTodolistsAC} from '../todolist-reducer';
 import {APItodolist, TaskPriorities, TaskStatuses, TaskType, UpdateTaskModelType} from "../../../../DAL/API";
 import {Dispatch} from "redux";
 import {AppActionsType, AppRootStateType, AppThunkType} from "../../../../app/store";
@@ -18,6 +18,8 @@ export const tasksReducer = (state: TasksBusinessType = initialState, action: Ta
         case 'REMOVE-TODOLIST': const copyState = {...state};delete copyState[action.id];return copyState;
         case "SET-TASK-ENTITY-STATUS": return {...state, [action.todolistId] : state[action.todolistId]
                 .map(el => el.id === action.taskId ? {...el, entityStatus : action.entityStatus} : el)}
+        case "CLEAR-DATA":
+            return {}
         default: return state;}}
 
 // ACTION CREATORS
@@ -120,6 +122,8 @@ export type TasksActionType =
     | ReturnType<typeof setTodolistsAC>
     | ReturnType<typeof setTasksAC>
     | ReturnType<typeof setTaskEntityStatusAC>
+    | ReturnType<typeof clearTodosDataAC>
+
 export type TasksBusinessType = {[key: string]: Array<TaskBusinessType>}
 export type TaskBusinessType = TaskType & { entityStatus : RequestStatusType}
 type UpdateTaskBusinessModelType = {title?: string, description?: string, status?: TaskStatuses,

@@ -1,6 +1,6 @@
 import axios from "axios";
 import {RequestStatusType} from "../app/app-reducer";
-import {LoginFormType} from "../features/login/Login";
+import {LoginFormType} from "../features/auth/Login";
 import {number} from "prop-types";
 const instance = axios.create({
     baseURL: "https://social-network.samuraijs.com/api/1.1/",
@@ -26,6 +26,12 @@ export const APItodolist = {
 export const APIAuth = {
     login(data: LoginFormType){
         return instance.post<ResponseTasksType<{ userId : number}>>("auth/login", data)
+    },
+    me(){
+        return instance.get<ResponseTasksType<{ id: string, email: string, login: string }>>("auth/me")
+    },
+    logOut(){
+        return instance.delete<ResponseTasksType>("auth/login")
     }
 }
 // TYPES
@@ -36,6 +42,6 @@ export enum TaskPriorities {Low = 0, Middle = 1, Hi = 2, Urgently = 3, Later = 4
 export type TaskType = {description: string,title: string,status: TaskStatuses,priority: TaskPriorities,startDate: string,
     deadline: string,id: string,todoListId: string,order: number,addedDate: string}
 export type getTasksType = {error : string,items : Array<TaskType>,totalCount : number}
-export type ResponseTasksType<T> = {resultCode: number,messages: Array<string>,data: T}
+export type ResponseTasksType<T = {}> = {resultCode: number,messages: Array<string>,data: T}
 export type UpdateTaskModelType = {title: string,description: string,status: TaskStatuses,priority: TaskPriorities,
     startDate: string, deadline: string}
