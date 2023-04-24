@@ -16,7 +16,7 @@ import {initializedTC, logOutTC} from "../features/auth/authReducer";
 type AppPropsType = {
     demo? : boolean
 }
-function AppWithRedux({demo = false, ...props} : AppPropsType) {
+export function AppWithRedux({demo = false, ...props} : AppPropsType) {
     const dispatch = useAppDispatch()
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
     const initialized = useSelector<AppRootStateType, boolean>(state => state.login.isInitialized)
@@ -55,11 +55,10 @@ function AppWithRedux({demo = false, ...props} : AppPropsType) {
                     <Route path={"/"} element={<TodolistsList demo={true}/>}/>
                     <Route path={"/auth"} element={<Login/>}/>
                     <Route path={"404"} element={<h1 style={{textAlign : "center"}}>error 404 page not found</h1>}/>
-                    <Route path={"https://khekhaevselim.github.io/task-manager/"} element={<Navigate to={"/"}/>
+                    <Route path={"https://khekhaevselim.github.io/task-manager/"} element={<Navigate to={"/"}/>}/>
                     <Route path={"*"} element={<Navigate to={"404"}/>}/>
                 </Routes>
             </Container>
         </div>
     );
 }
-export default AppWithRedux;
