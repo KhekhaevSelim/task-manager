@@ -1,4 +1,3 @@
-import { ThunkDispatch } from "redux-thunk";
 import {LoginFormType} from "./Login";
 import {AppThunkType} from "../../app/store";
 import {APIAuth} from "../../DAL/API";
