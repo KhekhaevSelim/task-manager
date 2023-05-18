@@ -79,3 +79,13 @@ export type CreateTaskArgType = {
 }
 export type UpdateTaskArgType = { todolistId: string, taskId: string, BusinessModel: UpdateTaskBusinessModelType }
 export type RemoveTaskArgType = {taskId: string, todolistId: string}
+export type getTodolistsArgType = {
+    todolists : TodolistType[]
+}
+export type RemoveTodolistArgType = {
+    todolistId : string
+}
+export type ChangeTodolistTitleArgType = {
+    todolistId : string,
+    title : string
+}

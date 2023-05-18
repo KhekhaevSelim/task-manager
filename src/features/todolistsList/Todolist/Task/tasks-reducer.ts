@@ -1,17 +1,18 @@
-import {addTodolistAC, clearTodosDataAC, removeTodolistAC, setTodolistsAC} from '../todolist-reducer';
+import {clearTodosDataAC, todolistThunks} from '../todolist-reducer';
 import {
     APItodolist,
-    CreateTaskArgType, RemoveTaskArgType,
+    CreateTaskArgType,
+    RemoveTaskArgType,
     ResultCode,
     TaskPriorities,
     TaskStatuses,
-    TaskType, UpdateTaskArgType,
+    TaskType,
+    UpdateTaskArgType,
     UpdateTaskModelType
 } from "../../../../DAL/API";
-import {AppThunkType} from "../../../../app/store";
 import {RequestStatusType, setAppStatusAC} from "../../../../app/app-reducer";
 import {handleServerAppError, handleServerNetWorkError} from "../../../../utils/error-utils/error-utils";
-import {createSlice, PayloadAction, createAsyncThunk} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {createAppAsyncThunk} from "../../../../utils/appAsynkThunk/createAppAsyncThunk";
 
 const initialState: TasksBusinessType = {}
@@ -133,15 +134,15 @@ const slice = createSlice({
                 const index = state[action.payload.todolistId].findIndex(t => t.id === action.payload.taskId)
                 state[action.payload.todolistId][index] = {...state[action.payload.todolistId][index], ...action.payload.BusinessModel}
             })
-            .addCase(setTodolistsAC, (state, action) => {
+            .addCase(todolistThunks.getTodolists.fulfilled, (state, action) => {
                 action.payload.todolists.forEach(tl => {
                     state[tl.id] = []
                 })
             })
-            .addCase(addTodolistAC, (state, action) => {
+            .addCase(todolistThunks.addTodolist.fulfilled, (state, action) => {
                 state[action.payload.todolist.id] = []
             })
-            .addCase(removeTodolistAC, (state, action) => {
+            .addCase(todolistThunks.removeTodolist.fulfilled,(state, action) => {
                 delete state[action.payload.todolistId]
             })
             .addCase(clearTodosDataAC, (state, action) => {

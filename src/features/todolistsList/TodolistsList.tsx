@@ -5,15 +5,12 @@ import React, {useCallback, useEffect} from "react";
 import {useAppDispatch} from "../../castomHooks/appHooks";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
-import { TasksBusinessType, tasksThunk} from "./Todolist/Task/tasks-reducer";
+import {TasksBusinessType, tasksThunk} from "./Todolist/Task/tasks-reducer";
 import {
-    addTodolistTC,
     changeTodolistFilterAC,
-    changeTodolistTitleTC,
     FilterValuesType,
-    getTodolistsTC,
-    removeTodolistTC,
-    TodolistBusinessType
+    TodolistBusinessType,
+    todolistThunks
 } from "./Todolist/todolist-reducer";
 import {TaskStatuses} from "../../DAL/API";
 import {Navigate} from "react-router-dom";
@@ -30,7 +27,7 @@ export const TodolistsList = ({demo = false, ...props}: TodolistsListPropsType) 
 
     useEffect(() => {
         if(demo && isLoggedIn){
-            dispatch(getTodolistsTC())
+            dispatch(todolistThunks.getTodolists())
         }
 
     }, [demo,isLoggedIn])
@@ -60,15 +57,15 @@ export const TodolistsList = ({demo = false, ...props}: TodolistsListPropsType) 
     }, [])
 
     const removeTodolist = useCallback((id: string) => {
-        dispatch(removeTodolistTC(id));
+        dispatch(todolistThunks.removeTodolist({ todolistId : id } ));
     }, [])
 
     const changeTodolistTitle = useCallback((id: string, title: string) => {
-        dispatch(changeTodolistTitleTC(id,title))
+        dispatch(todolistThunks.changeTodolistTitle({ todolistId :id, title }))
     }, [])
 
     const addTodolist = useCallback((title: string) => {
-        dispatch(addTodolistTC(title));
+        dispatch(todolistThunks.addTodolist({ title }));
     }, [])
 
     if(!isLoggedIn){

@@ -2,7 +2,7 @@ import {
     TasksBusinessType,
     tasksReducer, tasksThunk, UpdateTaskBusinessModelType
 } from './tasks-reducer';
-import {addTodolistAC, removeTodolistAC} from '../todolist-reducer';
+import { todolistThunks} from '../todolist-reducer';
 import {TaskPriorities, TaskStatuses, UpdateTaskModelType} from "../../../../DAL/API";
 import {v1} from "uuid";
 
@@ -88,7 +88,8 @@ test('title of specified task should be changed', () => {
     expect(endState["todolistId2"][0].title).toBe("Milk");
 });
 test('new array should be added when new todolist is added', () => {
-    const action = addTodolistAC( { todolist : {id: v1(), title : "new todolist", addedDate : "", order : 0} });
+    const action = todolistThunks.addTodolist.fulfilled( { todolist : {id: v1(), title : "new todolist", addedDate : "", order : 0} }, "",
+        { title : "new todolist"});
 
     const endState = tasksReducer(startState, action)
 
@@ -103,7 +104,7 @@ test('new array should be added when new todolist is added', () => {
     expect(endState[newKey]).toEqual([]);
 });
 test('property with todolistId should be deleted', () => {
-    const action = removeTodolistAC(  { todolistId : "todolistId2" } ) ;
+    const action = todolistThunks.removeTodolist.fulfilled(  { todolistId : "todolistId2" }, "",{ todolistId : "todolistId2" } ) ;
 
     const endState = tasksReducer(startState, action)
 

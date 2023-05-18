@@ -55,7 +55,6 @@ export const Todolist = React.memo(({demo, ...props}: PropsType) => {
     if(props.todolist.filter === "active"){
         allTasks = tasksForRender.filter(t => t.status === TaskStatuses.New);
     }
-    // console.log(props.todolist.entityStatus)
     return <div>
         <h3> <EditableSpan  value={props.todolist.title} onChange={changeTodolistTitle} />
             <IconButton onClick={removeTodolist} disabled={props.todolist.entityStatus === "loading"}>
