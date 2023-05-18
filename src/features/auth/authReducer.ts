@@ -2,48 +2,39 @@ import {LoginFormType} from "./Login";
 import {AppThunkType} from "../../app/store";
 import {APIAuth} from "../../DAL/API";
 import {setAppStatusAC} from "../../app/app-reducer";
-import {handleServerAppError, handleServerNetWorkError} from "../../error-utils/error-utils";
+import {handleServerAppError, handleServerNetWorkError} from "../../utils/error-utils/error-utils";
 import {clearTodosDataAC} from "../todolistsList/Todolist/todolist-reducer";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 const initialState = {
     isLoggedIn : false,
     isInitialized : false
 }
-
-
-export const authReducer = (state : InitialStateType = initialState, action : LoginACTypes) : InitialStateType => {
-    switch (action.type) {
-        case "SET-LOGIN" :
-            return {...state, isLoggedIn: action.value}
-        case "SET-INITIALIZED":
-            return {...state, isInitialized: true}
-        default :
-            return state
+const slice = createSlice({
+    name : "auth",
+    initialState : initialState,
+    reducers : {
+        setLoggedInAC(state, action: PayloadAction<{value : boolean}>){
+            state.isLoggedIn = action.payload.value
+        },
+        setInitializedAC(state){
+            state.isInitialized = true
+        }
     }
-}
+})
 
-// AC
+export const authReducer = slice.reducer
+export const { setLoggedInAC, setInitializedAC } = slice.actions
 
-export const setLoggenInAC = (value : boolean) => {
-    return {
-        type : "SET-LOGIN",
-        value
-    }as const
-}
-export const setInitializedAC = () => {
-    return {
-        type : "SET-INITIALIZED"
-    }as const
-}
 
 // TC
 export const loginTC = (formData : LoginFormType) : AppThunkType => dispatch => {
-    dispatch(setAppStatusAC("loading"))
+    dispatch(setAppStatusAC({status : "loading"}))
     APIAuth.login(formData)
         .then(res=> {
             if(res.data.resultCode === 0){
-                dispatch(setLoggenInAC(true))
-                dispatch(setAppStatusAC("succeeded"))
+                dispatch(setLoggedInAC({value :true}))
+                dispatch(setAppStatusAC({status: "succeeded"}))
             } else {
                 handleServerAppError(res.data,dispatch)
             }
@@ -53,12 +44,12 @@ export const loginTC = (formData : LoginFormType) : AppThunkType => dispatch => 
         })
 }
 export const initializedTC = () : AppThunkType => dispatch => {
-    dispatch(setAppStatusAC("loading"))
+    dispatch(setAppStatusAC({status: "loading"}))
     APIAuth.me()
         .then(res=> {
             if(res.data.resultCode === 0){
-                dispatch(setLoggenInAC(true))
-                dispatch(setAppStatusAC("succeeded"))
+                dispatch(setLoggedInAC({value :true}))
+                dispatch(setAppStatusAC({ status:"succeeded"}))
             } else {
                 handleServerAppError(res.data,dispatch)
             }
@@ -72,12 +63,12 @@ export const initializedTC = () : AppThunkType => dispatch => {
 }
 
 export const logOutTC = () : AppThunkType => dispatch => {
-    dispatch(setAppStatusAC("loading"))
+    dispatch(setAppStatusAC({status : "loading" }))
     APIAuth.logOut()
         .then(res=> {
             if(res.data.resultCode === 0){
-                dispatch(setLoggenInAC(false))
-                dispatch(setAppStatusAC("succeeded"))
+                dispatch(setLoggedInAC({value :false}))
+                dispatch(setAppStatusAC({status : "succeeded"}))
                 dispatch(clearTodosDataAC())
             } else {
                 handleServerAppError(res.data,dispatch)
@@ -95,5 +86,3 @@ export const logOutTC = () : AppThunkType => dispatch => {
 
 
 // TYPES
-type InitialStateType = typeof initialState
-export type LoginACTypes = ReturnType<typeof setLoggenInAC> | ReturnType<typeof setInitializedAC>

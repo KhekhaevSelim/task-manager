@@ -33,7 +33,7 @@ export const CreateTasks = () => {
 
     let [tasks, setTasks] = useState<any>(null)
     const updateTask = ( todolistId : string , title : string) => {
-        APItodolist.createTask(todolistId, title).then((res)=> {
+        APItodolist.createTask({todolistId , title}).then((res)=> {
             debugger
             setTasks(res.data.data)
         })

@@ -24,7 +24,6 @@ const Task = React.memo((props: TaskPropsType) => {
         props.changeTaskTitle(props.task.id, newValue, props.todolistId);
     }
 
-
     return <div key={props.task.id} className={props.task.status === TaskStatuses.Completed ? "is-done" : ""}>
         <Checkbox
             checked={props.task.status === TaskStatuses.Completed}

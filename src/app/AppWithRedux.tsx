@@ -42,7 +42,7 @@ export function AppWithRedux({demo = false, ...props} : AppPropsType) {
                         <Menu/>
                     </IconButton>
                     <Typography variant="h6">
-                        News
+                        Newsw
                     </Typography>
                     { isLogged && <Button color="inherit" onClick={logOut}>Log out</Button>}
                 </Toolbar>
@@ -55,7 +55,6 @@ export function AppWithRedux({demo = false, ...props} : AppPropsType) {
                     <Route path={"/"} element={<TodolistsList demo={true}/>}/>
                     <Route path={"/auth"} element={<Login/>}/>
                     <Route path={"404"} element={<h1 style={{textAlign : "center"}}>error 404 page not found</h1>}/>
-                    <Route path={"https://khekhaevselim.github.io/task-manager/"} element={<Navigate to={"/"}/>}/>
                     <Route path={"*"} element={<Navigate to={"404"}/>}/>
                 </Routes>
             </Container>

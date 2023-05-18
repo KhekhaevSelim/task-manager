@@ -24,7 +24,7 @@ beforeEach(() => {
 })
 
 test('correct todolist should be removed', () => {
-    const endState = todolistReducer(startState, removeTodolistAC(todolistId1))
+    const endState = todolistReducer(startState, removeTodolistAC({ todolistId : todolistId1 } ))
 
     expect(endState.length).toBe(1);
     expect(endState[0].id).toBe(todolistId2);
@@ -33,7 +33,7 @@ test('correct todolist should be removed', () => {
 test('correct todolist should be added', () => {
     let newTodolistTitle = "New Todolist";
 
-    const endState = todolistReducer(startState, addTodolistAC({id: v1(), title : newTodolistTitle, addedDate : "", order : 0}))
+    const endState = todolistReducer(startState, addTodolistAC({ todolist : {id: v1(), title : newTodolistTitle, addedDate : "", order : 0} } ))
 
     expect(endState.length).toBe(3);
     expect(endState[0].title).toBe(newTodolistTitle);
@@ -43,7 +43,7 @@ test('correct todolist should be added', () => {
 test('correct todolist should change its name', () => {
     let newTodolistTitle = "New Todolist";
 
-    const action = changeTodolistTitleAC(todolistId2, newTodolistTitle);
+    const action = changeTodolistTitleAC({ id : todolistId2, title : newTodolistTitle } ) ;
 
     const endState = todolistReducer(startState, action);
 
@@ -54,7 +54,7 @@ test('correct todolist should change its name', () => {
 test('correct filter of todolist should be changed', () => {
     let newFilter: FilterValuesType = "completed";
 
-    const action = changeTodolistFilterAC(todolistId2, newFilter);
+    const action = changeTodolistFilterAC( { id : todolistId2,filter : newFilter } );
 
     const endState = todolistReducer(startState, action);
 
@@ -65,7 +65,7 @@ test('correct filter of todolist should be changed', () => {
 test("correct todolist entity status should be changed", ()=> {
     let newStatus: RequestStatusType = "loading";
 
-    const action = setTodolistEntityStatusAC(todolistId2, newStatus);
+    const action = setTodolistEntityStatusAC( { todolistId : todolistId2, status : newStatus } );
 
     const endState = todolistReducer(startState, action);
 

@@ -8,7 +8,7 @@ import Task from "./Task/Task";
 import {TaskStatuses, TaskType} from "../../../DAL/API";
 import {FilterValuesType, TodolistBusinessType} from './todolist-reducer';
 import {useAppDispatch} from "../../../castomHooks/appHooks";
-import {setTasksTC, TaskBusinessType} from "./Task/tasks-reducer";
+import {TaskBusinessType, tasksThunk} from "./Task/tasks-reducer";
 
 
 type PropsType = {
@@ -28,7 +28,7 @@ export const Todolist = React.memo(({demo, ...props}: PropsType) => {
       const dispatch = useAppDispatch()
     useEffect(()=> {
         if(demo) {
-            dispatch(setTasksTC(props.todolist.id))
+            dispatch(tasksThunk.setTasks(props.todolist.id))
         }
     },[])
 
@@ -55,6 +55,7 @@ export const Todolist = React.memo(({demo, ...props}: PropsType) => {
     if(props.todolist.filter === "active"){
         allTasks = tasksForRender.filter(t => t.status === TaskStatuses.New);
     }
+    // console.log(props.todolist.entityStatus)
     return <div>
         <h3> <EditableSpan  value={props.todolist.title} onChange={changeTodolistTitle} />
             <IconButton onClick={removeTodolist} disabled={props.todolist.entityStatus === "loading"}>
